@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hunting Github</title>
+		<style media="screen">
+			*{
+				border: 0;
+			}
+			.container{
+				display: flex;
+				flex-direction: column;
+				width: 100vw;
+				height: 100vh;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.btn{
+				padding: 7px 16px;
+				background: #069;
+				color: white;
+				font-size: 1.6em;
+				display: inline-block;
+				margin-bottom: 30px;
+			}
+
+			.name{
+				font-size: 2.3em;
+				color: #666;
+			}
+
+			.username{
+				padding: 7px 10px;
+				outline: none;
+				margin-bottom: 10px;
+				border-bottom: 3px solid #777;
+				border-radius: 7px;
+				font-size: 1.5em;
+			}
+			.output{
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.pic >img{
+				width: auto;
+				height: 200px;
+				border-radius: 50%;
+				margin-right: 30px;
+			}
+		</style>
+		<script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="container">
+			<input type="text" class="username" value="">
+			<button type="button" name="button" class="btn">Get Github Name</button>
+			<div class="output">
+				<span class="pic"></span>
+				<span class="name"></span>
+			</div>
+		</div>
+	<script src="main.js" charset="utf-8"></script>
+	</body>
+</html>

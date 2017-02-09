@@ -1,0 +1,23 @@
+doctype
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		title
+		link(rel="stylesheet", href="css/main.css")
+		script(src="jquery/dist/jquery.min.js")
+		script(src="/socket.io/socket.io.js" type="text/javascript")
+
+	body
+		.container
+			main
+				form.survey-form(action="/process", method="post")
+					label.row(for="name") Your Name:
+						input#name.text.input-field(type="text", name="name")
+					label.row(for="loc") Dojo Location:
+						select#loc.text.input-field(name="loc")
+					label.row(for="lang") Favorite Language
+						select#lang.text.input-field(name="lang")
+					label.col(for="comment") Comment (optional):
+						textarea#comment.input-field(name="comment", cols="30", rows="10")
+					input.submit(type="submit", value="Submit")
+		script(src="js/app.js")

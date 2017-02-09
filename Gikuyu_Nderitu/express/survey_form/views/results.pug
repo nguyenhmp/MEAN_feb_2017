@@ -1,0 +1,18 @@
+doctype
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		title
+		link(rel="stylesheet", href="css/main.css")
+	body
+		.container
+			h1 Submitted Information
+			label.row(for="name") Your Name:
+				span.response-field(type="text", name="name")= name
+			label.row(for="loc") Dojo Location:
+				span.response-field(name="loc")= loc
+			label.row(for="lang") Favorite Language
+				span.response-field(name="lang")= lang
+			label.row(for="comment") Comment (optional):
+				span.response-field(name="comment", cols="30", rows="10")= comment
+			a.route(href="/") Go Back
