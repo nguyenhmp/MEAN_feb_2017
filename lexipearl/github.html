@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub API</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <button>Find Your Name!</button>
+    <div id="github">
+    </div>
+</body>
+<script>
+$(document).ready(function(){
+    $('button').on('click', function(){
+        $.get('https://api.github.com/users/eaw20024', displayName);
+    });
+    function displayName(data){
+        $('#github').append('<p>'+data.name+'</p>');
+        }
+});
+</script>
+</html>
