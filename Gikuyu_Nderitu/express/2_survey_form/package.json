@@ -1,0 +1,16 @@
+{
+  "name": "survey_form_2",
+  "version": "0.0.1",
+  "description": "Coding Dojo Survey Form assignment with sockets!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gikuyu Nderitu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "pug": "^2.0.0-beta11",
+    "socket.io": "^1.7.2"
+  }
+}

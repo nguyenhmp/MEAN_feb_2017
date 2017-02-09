@@ -1,0 +1,47 @@
+*{
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.container{
+	width: 100vw;
+	height: 100vh;
+	background: black;
+	display: flex;
+	flex-direction: column;
+}
+
+.container >* {
+	color: white
+}
+
+main{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+.route{
+	padding: 10px 20px;
+	text-decoration: none;
+	color: black;
+	background: white;
+	border-radius: 7px;
+	border: 2px solid #333;
+}
+.ninja-form{
+	display: inherit;
+	flex-direction: column;
+	justify-content: center;
+}
+.input-field{
+	border: 0;
+	border-bottom: 3px solid #ddd;
+	margin-bottom: 20px;
+	padding: 7px 12px;
+	outline: 0;
+	font-size: 1.4em;
+	color: white;
+	border-radius: 5px;
+	background: black;
+}

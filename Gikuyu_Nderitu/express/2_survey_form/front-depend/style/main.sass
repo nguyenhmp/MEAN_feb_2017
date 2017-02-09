@@ -1,0 +1,78 @@
+// vars
+$blue: #06d
+
+*
+	border: 0
+	padding: 0
+	margin: 0
+
+html
+	font-size: 1rem
+.container
+	display: flex
+	flex-direction: column
+	width: 80%
+	margin: 30px auto
+	padding: 30px
+	border: 5px solid #111
+
+.survey-form
+	font-size: 1.2em
+	display: flex
+	flex-direction: column
+
+.row
+	display: flex
+	justify-content: space-between
+
+.col
+	display: flex
+	flex-direction: column
+
+.input-field
+	outline: 0
+	border-bottom: 2px solid $blue
+	background: transparent
+	font-size: 1.4em
+	padding: 7px 16px
+	transition: border-bottom 200ms ease-in
+
+	&:focus
+		border-bottom: 2px solid #dd1
+
+.response-field
+	@extend .input-field
+	border: 0
+	padding: 0
+	margin-right: 5%
+.text
+	min-width: 300px
+	text-align: center
+
+.submit
+	max-width: 200px
+	font-size: 1.4em
+	align-self: flex-end
+	margin-right: 10%
+	padding: 7px 16px
+	margin-top: 20px
+	border-radius: 7px
+	color: #eee
+	background: $blue
+
+	&:hover
+		text-decoration: underline
+		cursor: pointer
+
+.route
+	@extend .submit
+	text-decoration: none
+
+.response
+	border: 3px solid #000
+	background: #1a4
+	font-size: 1.4em
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center

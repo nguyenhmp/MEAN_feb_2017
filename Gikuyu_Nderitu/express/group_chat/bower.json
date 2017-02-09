@@ -1,0 +1,21 @@
+{
+  "name": "survey_form",
+  "description": "This is folder contains a template to jumpstart MEAN web projects",
+  "main": "server.js",
+  "authors": [
+    "Gikuyu Nderitu"
+  ],
+  "license": "ISC",
+  "homepage": "Home",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
