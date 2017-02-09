@@ -1,0 +1,11 @@
+doctype
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		title Template Test
+		link(rel="stylesheet", href="css/style.css", attr)
+	body
+		.container
+			ul
+				each val in users
+					li= val.name +'  ' + val.email
