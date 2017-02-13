@@ -28,9 +28,8 @@ var person = {
 // console.log(person.name)
 
 // say_something - have it accept a parameter. This function should then say for example “{{your name}} says ‘I am cool’” if you pass ‘I am cool’ as an argument to this method.
-person.say_something =function(a){
- var str = "I am cool";
- return a + " says " + str;
+person.say_something = function(a){
+ return this.name + " says "+ a
 }
 
 // myObject.say_something(person.name)
