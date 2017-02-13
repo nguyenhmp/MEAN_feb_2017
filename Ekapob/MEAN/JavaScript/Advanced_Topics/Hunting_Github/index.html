@@ -1,0 +1,22 @@
+<!-- Ekapob Ukritnukun -->
+<!-- ThaiGQ@gmail.com -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <button id = "One_Button" type="button" name="button">Get Data</button>
+        <script type="text/javascript">
+            $("#One_Button").click(function () {
+                $.get("https://api.github.com/users/ThaiGQ", function displayName(data) {
+                    $("body").append("<p></p>" + data.login);
+                })
+                // Notice that displayName is a function that takes in 1 parameter (this is the data that comes back from the API)
+            })
+        </script>
+    </body>
+</html>
