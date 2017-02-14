@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Group Chat Assignment!</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    $(document).ready(function(){
+      var socket = io.connect()
+      $('#all_users').hide()
+      $('#online_users').hide()
+      name = prompt('Hello! What is your name?')
+      socket.emit('new_user_connected', {name:name})
+      socket.on('new_user_update', function(data){
+        $('#all_users').append(`<div id="${data.user.socket_id}" class="user">${data.user.name}<br><span>online now</span></div>`)
+        if($('#all_users').text()){
+          $('#online_users').show()
+          $('#all_users').show()
+          $('#no_users').hide()
+        }
+      })
+      socket.on('populate_existing_messages', function(data){
+          $('#chat_box').append(`${data.message}`)
+      })
+      socket.on('populate_existing_users', function(data){
+        if(data.socket_id && data.name){
+          $('#all_users').append(`<div id="${data.socket_id}" class="user">${data.name}<br><span>online now</span></div>`)
+        }
+        if($('#all_users').text()){
+          $('#online_users').show()
+          $('#all_users').show()
+          $('#no_users').hide()
+        }
+      })
+      console.log($('#all_users').text())
+      $('#you').text("Your Handle: " + name)
+      $('form').submit(function(){
+        if($('#chat').val().length != 0){
+          data = {
+            message:$('#chat').val(),
+            name:name
+          }
+          socket.emit('message_posted', {message:data})
+          socket.emit('update_message_thread', {message:`<p id="message">${data.name} says: ${data.message}</p>`})
+          $('#chat').val('')
+        }
+        return false
+      })
+      socket.on('new_message', function(data){
+        $('#chat_box').append(`<p id="message">${data.message.message.name} says: ${data.message.message.message}</p>`)
+      })
+      socket.on('user_logged_out', function(data){
+        $(`#${data.socket}`).remove()
+      })
+    })
+    </script>
+  </head>
+  <body>
+    <h1> Epic Group Chat! </h1>
+    <h2 id="you"></h2>
+    <h3 id="no_users"> No Users Online </h3>
+    <h3 id="online_users"> All Online Users: </h3>
+    <div id="all_users"></div>
+    <div id="chat_box"></div>
+    <div id="text">
+      <form>
+      <input id="chat" type="text"><input type="submit" value="Post">
+      </form>
+    </div>
+  </body>
+</html>
