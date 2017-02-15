@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script tipe="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css"></style>
+    <link rel="stylesheet" type="text/css" href="skeleton.css"></style>
+    <link rel="stylesheet" type="text/css" href="groupChat.css"></style>
+    <title>Pangolin Dashboard</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>Pangolin Dashboard</h1>
+        <div id="form">
+            <form class="userForm" action="/pangolins" method="post">
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+                <label for="age">Age:</label>
+                <input type="text" name="age">
+                <label for="size">Size:</label>
+                <input type="text" name="size">
+                <label for="weight">Weight:</label>
+                <input type="text" name="weight">
+                <input type="submit" value="Add Pangolin">
+            </form>
+        </div> <!-- end form -->
+        <div id="users">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Age</th><th>Size</th><th>Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(pangolin of pangolinlist){ %>
+                        <tr>
+                            <td><%= pangolin.name %></td><td><%= pangolin.age %></td><td><%= pangolin.size %></td><td><%= pangolin.weight %></td>
+                            <td>
+                                <form class="editForm" action="/pangolins/edit/<%= pangolin._id %>" method="get">
+                                    <input type="submit" value="edit">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/pangolins/destroy/<%= pangolin._id %>" method='post'>
+                                    <input type="submit" value="delete">
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div> <!-- end container -->
+
+</body>
+</html>

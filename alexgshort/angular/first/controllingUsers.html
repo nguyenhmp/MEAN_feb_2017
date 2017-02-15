@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('usersController', ['$scope', function ($scope){
+      // we don't need a factory for this demo, it wouldn't make a difference if we did.
+        $scope.users = [
+        ];
+        $scope.addUser = function(){
+            console.log("addUser ran");
+            console.log("$scope.user = ", $scope.user);
+            $scope.users.push($scope.user);
+            $scope.user = {};
+        }
+        $scope.deleteUser = function(idx){
+            console.log("deleteUser ran");
+            console.log("idx = ", idx);
+            $scope.users.splice(idx, 1);
+        }
+        $scope.tableOrder = 'lastname';
+        $scope.setTableOrder = function(order){
+            $scope.tableOrder = order;
+        }
+    }])
+  </script>
+</head>
+<body ng-app='myApp'>
+    <h1>Users Controller</h1>
+    <div id="users" ng-controller='usersController'>
+        <form>
+            First Name: <input type="text" ng-model='user.firstname' ng-required='required'>
+            Last Name: <input type="text" ng-model='user.lastname' ng-required='required'>
+            Favorite Language: <input type="text" ng-model='user.language'>
+            Any Date: <input type="date" ng-model='user.date' placeholder="yyyy-mm-dd">
+            <input type="submit" value="Create User" ng-click="addUser()">
+        </form>
+        Filter: <input type="text" ng-model='filter_by'>
+        <table>
+            <thead>
+                <tr>
+                    <th ng-click='setTableOrder("firstname")'>First Name</th><th ng-click='setTableOrder("lastname")'>Last Name</th><th ng-click='setTableOrder("language")'>Fav Language</th><th ng-click='setTableOrder("date")'>Date</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='user in users | orderBy: tableOrder | filter:filter_by'>
+                    <td>{{user.firstname}}</td><td>{{user.lastname}}</td><td>{{user.language}}</td><td>{{user.date | date:'EEEE, MMMM d, yyyy'}}</td><td><button ng-click='deleteUser($index)'>Delete User</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> <!-- end users -->
+</body>
+</html>

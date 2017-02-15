@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script tipe="text/javascript" src="/socket.io/socket.io.js"></script>
+    <title>Survey Form Revisited</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io.connect();
+            var numCount = "0 times.";
+            socket.on('new_pushCount', function(data){
+                $('#numCount').html(data.numCount);
+            });
+            socket.on('init_count', function(data){
+                $('#numCount').html(data.numCount);
+            })
+            $('#epicButton').click(function(){
+                console.log("epic button pushed");
+                socket.emit("button_push");
+            });
+            $('#resetButton').click(function(){
+                console.log("reset button pushed");
+                socket.emit("reset_push");
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>The button has been pushed <span id="numCount"><%= numCount %></span></h1>
+        <p>Push the button to update the count!</p>
+        <button type="button" name="epicButton" id="epicButton">Push the epic button</button>
+        <button type="button" name="resetButton" id="resetButton">Reset count</button>
+    </div> <!-- end container -->
+
+</body>
+</html>

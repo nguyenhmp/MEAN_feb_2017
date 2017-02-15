@@ -1,0 +1,15 @@
+#container{
+    background-color: #72506B;
+    width: 80%;
+    padding: 20px;
+}
+
+h2, #chatter, #newMessage{
+    padding: 5px;
+    background-color: #D4CAD5;
+    color: black;
+}
+
+#newMessage{
+    margin-top: 20px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css"></style>
+    <link rel="stylesheet" type="text/css" href="skeleton.css"></style>
+    <link rel="stylesheet" type="text/css" href="messageBoard.css"></style>
+    <title>The Dojo Message Board</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>The Dojo Message Board</h1>
+        <div id="form">
+            <form class="messageForm" action="/createMessage" method="post">
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+                <label for="message">Message:</label>
+                <textarea name="message"></textarea>
+                <input type="submit" value="Post message">
+            </form>
+        </div> <!-- end form -->
+        <div id="messages">
+            <% for(message of messages){ %>
+                <p>Name: <%= message.name %></p>
+                <p>Message: <%= message.message %></p>
+                <p>Comments:</p>
+                <% for(var i = 0; i < message.comments.length; i++) { %>
+                    <p>-<%= message.comments[i].name %></p>
+                    <p>-<%= message.comments[i].comment %></p>
+                <% } %>
+                <form action="/createComment/<%= message._id %>" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name">
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment"></textarea>
+                    <input type="submit" value="Post comment">
+                </form>
+            <% } %>
+        </div>
+    </div> <!-- end container -->
+
+</body>
+</html>

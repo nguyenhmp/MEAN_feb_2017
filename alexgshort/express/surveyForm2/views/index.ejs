@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script tipe="text/javascript" src="/socket.io/socket.io.js"></script>
+    <title>Survey Form Revisited</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io.connect();
+            socket.on('server_response', function(data){
+                $('#response').html(data.response);
+            });
+            $('form').submit(function(){
+                var data = {
+                    'name': $('#name').val(),
+                    'location': $('#location').val(),
+                    'language': $('#language').val(),
+                    'comment': $('#comment').val()
+                }
+                socket.emit("posting_form", data);
+                return false;
+            });
+        })
+    </script>
+</head>
+<body>
+    <h1>Survey Form</h1>
+    <div id="response"></div>
+    <form action="/users" method='post'>
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" id="name"><br />
+        <label for="location">Dojo Location:</label>
+        <select name="location" id="location">
+            <option value="DC">DC</option>
+            <option value="Ames">Ames</option>
+            <option value="Manchester">Manchester</option>
+        </select><br />
+        <label for="language">Favorite Language:</label>
+        <select name="language" id="language">
+            <option value="English">English</option>
+            <option value="Cobol">Cobol</option>
+            <option value="Javascript">Javascript</option>
+        </select><br />
+        <label for="comment">Comment (optional):</label>
+        <textarea name="comment" id="comment"></textarea><br />
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
