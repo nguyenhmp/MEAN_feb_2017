@@ -1,0 +1,50 @@
+<!-- Ekapob Ukritnukun -->
+<!-- ThaiGQ@gmail.com -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1> Dojo Message Board </h1>
+        <div id = "message_form" class="">
+            <form class="" action="/create_message" method="post">
+                <div class="">
+                    <label for=""> Name: </label>
+                    <input type="text" name="name">
+                </div>
+                <div class="">
+                    <label for=""> Message: </label>
+                    <textarea name="message" rows="8" cols="80"></textarea>
+                </div>
+                <input type="submit" value="Post Message">
+            </form>
+            <hr>
+        </div>
+        <div class="">
+            <% for (message in content.messages) { %>
+                <h2> Name: <%= content.messages[message].name %> </h2>
+                <h2> Message: <%= content.messages[message].message %> </h2>
+                <% for (comment in content.messages[message].comments) { %>
+                    <p> Name: <%= content.messages[message].comments[comment].name %> </p>
+                    <p> Comment: <%= content.messages[message].comments[comment].comment %> </p>
+                <% } %>
+                <div class="">
+                    <form class="" action="/message/<%= content.messages[message].id%>" method="post">
+                        <div class="">
+                            <label for=""> Name: </label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="">
+                            <label for=""> Comment: </label>
+                            <textarea name="comment" rows="8" cols="80"></textarea>
+                        </div>
+                        <input type="submit" value="Post Comment">
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>

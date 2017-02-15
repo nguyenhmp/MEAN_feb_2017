@@ -1,0 +1,45 @@
+<!-- Ekapob Ukritnukun -->
+<!-- ThaiGQ@gmail.com -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <p> <a href="/"> Home </a> </p>
+        <div class="">
+            <form class="" action="/heroes/update/<%= options.hero.id %>" method="post">
+                <div class="">
+                    <label for=""> Name: </label>
+                    <input type="text" name="name" value="<%= options.hero.name %>">
+                </div>
+                <div class="">
+                    <label for=""> Race: </label>
+                    <select class="" name="race">
+                        <% for (var race in options.races) { %>
+                            <option value= <%= options.races[race] %> > <%= options.races[race] %> </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="">
+                    <label for=""> Class: </label>
+                    <select class="" name="class">
+                        <% for (var item in options.classes) { %>
+                            <option value= <%= options.classes[item] %> > <%= options.classes[item] %> </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="">
+                    <label for=""> Level: </label>
+                    <input type="number" name="level" value="<%= options.hero.level %>">
+                </div>
+                <input type="submit" name="" value="Update Hero">
+            </form>
+            <form class="" action="/heroes/destroy/<%= options.hero.id %>" method="post">
+                <input type="submit" value="Retire Hero">
+            </form>
+        </div>
+    </body>
+</html>
