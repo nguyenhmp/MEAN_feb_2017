@@ -1,0 +1,29 @@
+<!-- Ekapob Ukritnukun -->
+<!-- ThaiGQ@gmail.com -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <style media="screen">
+            .blue_button {background-color: blue; color: white;}
+            .red_button {background-color: red; color: white;}
+            .green_button {background-color: green; color: white;}
+        </style>
+    </head>
+    <body>
+        <p>Hello World!</p>
+        <button id = "One_Button" class = "blue_button" type="button" name="button">Blue Button</button>
+        <script type="text/javascript">
+            $("#One_Button").click(function() {
+                $(this).toggleClass("red_button");
+            });
+            $("#One_Button").hover(function () {
+                $(this).toggleClass("green_button");
+                $(this).toggleClass("blue_button");
+            })
+        </script>
+    </body>
+</html>

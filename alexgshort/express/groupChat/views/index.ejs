@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script tipe="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css"></style>
+    <link rel="stylesheet" type="text/css" href="skeleton.css"></style>
+    <link rel="stylesheet" type="text/css" href="groupChat.css"></style>
+    <title>Group Chat</title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var socket = io.connect();
+
+            //** socket functions
+            socket.on('init_chatter', function(data){
+                console.log("ran init_chatter");
+                $('#chatter').html(data.data);
+            });
+
+            socket.on('add_message', function(data){
+                $('#chatter').append(data.new_message);
+            })
+
+            //** form submit functions
+
+            // initialize username
+            $('#submitname').click(function(){
+                console.log("submitname button pushed");
+                if($('#name').val()){
+                    username = $('#name').val();
+                }
+                return false;
+            });
+
+            $('#cancelname').click(function(){
+                console.log("cancelname button pushed.  It doesn't do anything.");
+                return false;
+            })
+
+            $('#submitmessage').click(function(){
+                if($('#message').val != ""){
+                    socket.emit("new_message", { message: `${username}: ${$('#message').val()}`});
+                    $('#message').val('');
+                }
+                return false;
+            })
+            var username = prompt("Your name:", "enter name here");
+            socket.emit("add_user", {username: username});
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h2>Group Chat</h2>
+        </div> <!-- end header -->
+        <div id="chatter">
+
+        </div>
+        <div id="newMessage">
+            <form action="return: false">
+                <input type="text" name="message" id="message" placeholder="enter your message here" >
+                <input type="submit" name="submitmessage" id="submitmessage" value="Send">
+            </form>
+        </div>
+    </div> <!-- end container -->
+
+</body>
+</html>

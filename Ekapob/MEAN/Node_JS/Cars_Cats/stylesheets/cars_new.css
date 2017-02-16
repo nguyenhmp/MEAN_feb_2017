@@ -1,0 +1,67 @@
+/*Ekapob Ukritnukun*/
+/*ThaiGQ@gmail.com*/
+
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+    #wrapper
+    {
+        /*outline: 1px solid red;*/
+        height: 300px;
+        width: 410px;
+        margin: 100px auto;
+        padding: 25px;
+    }
+
+    #main_content
+    {
+        outline: 1px solid black;
+        height: 260px;
+        width: 370px;
+        padding: 20px;
+    }
+
+        #main_content h1
+        {
+            outline: 1px solid red;
+        }
+
+        #data
+        {
+            outline: 1px solid red;
+            padding: 20px 0px;
+        }
+            form
+            {
+
+            }
+                .input_field
+                {
+                    /*outline: 1px solid red;*/
+                    display: flex;
+                    align-content: space-between;
+                    justify-content: space-between;
+                }
+                .input_name
+                {
+                    /*outline: 1px solid red;*/
+                    width: 150px;
+                    display: flex;
+                    align-self: center;
+                }
+                .input
+                {
+                    /*outline: 1px solid red;*/
+                    width: 200px;
+                    padding: 2px 0px;
+                }
+
+                #register
+                {
+                    position: relative;
+                    top: 10px;
+                    left: 268px;
+                }

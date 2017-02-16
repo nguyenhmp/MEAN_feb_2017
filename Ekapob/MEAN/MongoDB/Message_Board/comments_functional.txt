@@ -1,0 +1,16 @@
+Works perfectly fine, but not using populate():
+
+<% for (comment in content.comments) { %>
+                    <% if (content.comments[comment]._message == content.messages[message].id) { %>
+                        <p> Name: <%= content.comments[comment].name %> </p>
+                        <p> Comment: <%= content.comments[comment].comment %> </p>
+                    <% } %>
+                <% } %>
+
+
+Sort of works using populate(), but also have a bunch of extra stuff:
+
+<% for (comment in content.messages[message].comments) { %>
+                    <p> Name: <%= content.messages[message].comments[comment].name %> </p>
+                    <p> Comment: <%= content.messages[message].comments[comment].comment %> </p>
+                <% } %>

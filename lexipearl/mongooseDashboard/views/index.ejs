@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Owls</title>
+</head>
+<body>
+    <h2>All Owls</h2>
+    <% for (var x in owls){ %>
+        <p>
+            <a href="/<%=owls[x].id%>"> <%= owls[x].name %> </a> : <a href="/<%= owls[x].id %>/edit/">Edit owl</a>
+        </p>
+        <form action="/<%= owls[x].id %>/delete/" method='post'>
+        <input type="submit" value="Delete">
+        </form>
+        <hr>
+    <% } %>
+
+	<a href="/add" method="get">Add a new Owl!</a>
+</body>
+</html>
