@@ -24,15 +24,16 @@
             <hr>
         </div>
         <div class="">
-            <% for (message in content.messages) { %>
-                <h2> Name: <%= content.messages[message].name %> </h2>
-                <h2> Message: <%= content.messages[message].message %> </h2>
-                <% for (comment in content.messages[message].comments) { %>
-                    <p> Name: <%= content.messages[message].comments[comment].name %> </p>
-                    <p> Comment: <%= content.messages[message].comments[comment].comment %> </p>
+            <% for (message in messages) { %>
+                <h2> Name: <%= messages[message].name %> </h2>
+                <h2> Message: <%= messages[message].message %> </h2>
+                <% for (var i = 0; i < messages[message].comments.length; i++) { %>
+                    <p> Name: <%= messages[message].comments[i].name %> </p>
+                    <p> Comment: <%= messages[message].comments[i].comment %> </p>
+                    <hr>
                 <% } %>
                 <div class="">
-                    <form class="" action="/message/<%= content.messages[message].id%>" method="post">
+                    <form class="" action="/message/<%= messages[message].id%>" method="post">
                         <div class="">
                             <label for=""> Name: </label>
                             <input type="text" name="name">
