@@ -1,0 +1,57 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Controller and Directives -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var myAppModule = angular.module("app", []);
+            myAppModule.controller("foodController", ["$scope", function ($scope) {
+                $scope.food = ["hamburger steak"];
+                $scope.addFood = function () {
+                    $scope.food.push($scope.newFood);
+                    $scope.newFood = "";
+                };
+            }])
+        </script>
+    </head>
+    <body>
+        <div ng-controller = "foodController">
+            <div class="">
+                <form>
+                    <label> Favorite Food: <input type="text" ng-model = "newFood"></label>
+                    <input type="submit" value="Add to database" ng-click = "addFood()">
+                    <p ng-bind = "newFood"></p>
+                </form>
+            </div>
+            <div class="" ng-hide="hide">
+                <div class="">
+                    <label> Filter: <input type = "text" ng-model="search"></label>
+                    <ul>
+                        <li ng-repeat = "item in food | filter : search"> {{ item }} </li>
+                    </ul>
+                </div>
+                <div class="">
+                    <label>Twice as much food? <input type="checkbox" ng-model="double" ng-init="double=false" /></label>
+                    Yum!
+                    <ul ng-if="double">
+                        <li ng-repeat = "item in food | filter : search"> {{ item }} </li>
+                    </ul>
+                </div>
+            </div>
+            Oh no, giants are here! Hide the food!: <input type="checkbox" ng-model="hide">
+            <div class="">
+                Spoiler Alert: <input type="checkbox" ng-model="show">
+                <div class="" ng-show="show">
+                    Shame on you! It's more fun to discover it naturally!
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

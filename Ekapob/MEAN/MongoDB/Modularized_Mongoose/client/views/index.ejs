@@ -1,0 +1,27 @@
+<!-- Ekapob Ukritnukun -->
+<!-- ThaiGQ@gmail.com -->
+<!-- Assignment: Modularized Mongoose -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Welcome, Hero! The King is expecting you!</h1>
+        <div class="display_heroes">
+            <h2>Heroes visited:</h2>
+            <% for (var hero in heroes) { %>
+                <p> Name: <%= heroes[hero].name %> </p>
+                <p> Level <%= heroes[hero].level %> <%= heroes[hero].race %> <%= heroes[hero].class %> </p>
+                <p> <a href="/heroes/<%= heroes[hero].id %>"> Show Hero </a> </p>
+                <form class="" action="/heroes/destroy/<%= heroes[hero].id %>" method="post">
+                    <input type="submit" value="Retire Hero">
+                </form>
+                <hr>
+            <% } %>
+        </div> <!-- end of Display Heroes -->
+        <p> <a href="/heroes/new"> Add New Hero </a> </p>
+    </body>
+</html>

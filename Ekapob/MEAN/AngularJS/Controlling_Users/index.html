@@ -1,0 +1,55 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Controlling Users -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var myAppModule = angular.module("app", []);
+            myAppModule.controller("userController", ["$scope", function ($scope) {
+                $scope.users = [{name: "Ekapob", age: 37}];
+                $scope.addUser = function () {
+                    $scope.users.push($scope.newUser);
+                    $scope.newUser = {};
+                };
+                $scope.remove = function($index) {
+                    $scope.users.splice($index, 1);
+                }
+            }])
+        </script>
+    </head>
+    <body>
+        <div ng-controller = "userController">
+            <div class="">
+                <form>
+                    <label> User Name: <input type="text" ng-model = "newUser.name"></label>
+                    <label> User Age: <input type="text" ng-model = "newUser.age"></label>
+                    <input type="submit" value="Add to database" ng-click = "addUser()">
+                    <p ng-bind = "newUser.name"></p>
+                </form>
+            </div>
+            <div class="">
+                <p>Search Users by:</p>
+                <label> Name: <input type="text" ng-model="user.name"></label>
+                <label> Age: <input type="text" ng-model="user.age"></label>
+                <table>
+                    <tr>
+                        <th> Name </th>
+                        <th> Age </th>
+                    </tr>
+                    <tr ng-repeat="user in users | filter : user : strict track by $index">
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.age }} </td>
+                        <td> <a class="btn" ng-click="remove($index)"> Delete </a> </td>
+                    </tr >
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
