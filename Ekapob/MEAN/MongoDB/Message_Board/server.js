@@ -39,20 +39,10 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
     Message.find({}).populate("comments").exec(function(err, messages) {
-        console.log(messages);
         if (err) {
-            console.log("Danger! Danger! Iminent Warp Core breach detected!" + err);
+            console.log("Danger! Danger! Imminent Warp Core breach detected!" + err);
         }
-        Comment.find({}, function (err, comments) {
-            var content = {
-                messages: messages,
-                comments: comments
-            }
-            if (err) {
-                console.log("Danger! Danger! Iminent Warp Core breach detected!" + err);
-            }
-            res.render("index", {content:content});
-        })
+        res.render("index", {messages:messages});
     })
 })
 
