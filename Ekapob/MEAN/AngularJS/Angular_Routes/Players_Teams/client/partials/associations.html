@@ -1,0 +1,41 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Players and Teams -->
+
+<div ng-controller = "assignmentsController">
+    <div class="">
+        <form>
+            <!-- <select ng-model = "newAssociation.player" ng-options="player.name for player in players track by $index">
+
+            </select>
+            <select ng-model = "newAssociation.team" ng-options="team.name for team in teams track by $index">
+
+            </select> -->
+            <select class="" ng-model = "newAssociation.player">
+                <option ng-repeat = "player in players track by $index" value = "{{$index}}"> {{ player.name }} </option>
+            </select>
+            <select class="" ng-model = "newAssociation.team" >
+                <option ng-repeat = "team in teams track by $index" value = "{{$index}}"> {{ team.name }} </option>
+            </select>
+            <input type="submit" value="Assign Player to Team" ng-click = "joinTeam()">
+        </form>
+    </div>
+    <div class="">
+        <table>
+            <tr>
+                <th> Name </th>
+                <th> Team </th>
+                <th> Actions </th>
+            </tr>
+            <tr ng-repeat="player in players track by $index">
+                <td> {{ player.name }} </td>
+                <!-- displays team name according to index of team array, but team association gets changed as teams get deleted because reference is index of team array -->
+                <td> {{ teams[player.team].name }} </td>
+                <!-- for some reason, won't update team assignment unless all players removed -->
+                <td> <a class="btn" ng-click="quitTeam($index)"> <button type="button" name="button"> Remove From Team </button> </a> </td>
+            </tr >
+        </table>
+    </div>
+</div>

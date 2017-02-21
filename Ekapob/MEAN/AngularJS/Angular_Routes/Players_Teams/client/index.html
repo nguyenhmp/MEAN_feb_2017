@@ -1,0 +1,141 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Partials and Custom Users -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <script type="text/javascript">
+            var app = angular.module("app", ["ngRoute"]);
+            app.config(function ($routeProvider) {
+                $routeProvider
+                .when("/", {
+                    templateUrl: "partials/associations.html"
+                })
+                .when("/players", {
+                    templateUrl: "partials/players.html"
+                })
+                .when("/teams", {
+                    templateUrl: "partials/teams.html"
+                })
+                .otherwise({
+                    redirectTo: "/"
+                });
+            });
+
+            app.factory("PlayersFactory", ["$http", function ($http) {
+                var players = [{
+                    name: "Ekapob",
+                    team: ""
+                }];
+                var factory = {};
+
+                factory.getPlayers = function (callback) {
+                    callback(players);
+                };
+                factory.createPlayers = function (newPlayer) {
+                    newPlayer.team = "";
+                    players.push(newPlayer);
+                };
+                factory.destroyPlayers = function (index) {
+                    players.splice(index, 1);
+                };
+                factory.assignTeam = function (player_index, team_index) {
+                    console.log("Player:", player_index);
+                    console.log("Team:", team_index);
+                    players[player_index].team = team_index
+                    console.log(players[player_index]);
+                };
+                return factory;
+            }]);
+
+            app.factory("TeamsFactory", ["$http", function ($http) {
+                var teams = [{
+                    name: "Arsenal",
+                }];
+                var factory = {};
+
+                factory.getTeams = function (callback) {
+                    callback(teams);
+                };
+                factory.createTeams = function (newTeam) {
+                    teams.push(newTeam);
+                };
+                factory.destroyTeams = function (index) {
+                    teams.splice(index, 1);
+                };
+                return factory;
+            }]);
+
+            app.controller("playersController", ["$scope", "$location", "PlayersFactory", function ($scope, $location, PlayersFactory) {
+                $scope.players = [];
+                PlayersFactory.getPlayers(function (data) {
+                    $scope.players = data;
+                });
+                $scope.addPlayer = function () {
+                    PlayersFactory.createPlayers($scope.newPlayer)
+                    $scope.newPlayer = {};
+                    $location.url("/")
+                };
+                $scope.deletePlayer = function (index) {
+                    PlayersFactory.destroyPlayers(index)
+                };
+            }])
+
+            app.controller("teamsController", ["$scope", "$location", "TeamsFactory", function ($scope, $location, TeamsFactory) {
+                $scope.teams = [];
+                TeamsFactory.getTeams(function (data) {
+                    $scope.teams = data;
+                });
+
+                $scope.addTeam = function () {
+                    TeamsFactory.createTeams($scope.newTeam)
+                    $scope.newTeam = {};
+                    $location.url("/")
+                };
+
+                $scope.deleteTeam = function (index) {
+                    TeamsFactory.destroyTeams(index)
+                };
+            }])
+
+            app.controller("assignmentsController", ["$scope", "$location", "PlayersFactory", "TeamsFactory", function ($scope, $location, PlayersFactory, TeamsFactory) {
+                $scope.players = [];
+                PlayersFactory.getPlayers(function (data) {
+                    // console.log(data);
+                    $scope.players = data;
+                });
+
+                $scope.teams = [];
+                TeamsFactory.getTeams(function (data) {
+                    $scope.teams = data;
+                });
+
+                $scope.joinTeam = function () {
+                    console.log("Player:", $scope.newAssociation);
+                    PlayersFactory.assignTeam($scope.newAssociation.player, $scope.newAssociation.team)
+                };
+
+                $scope.quitTeam = function (player_index) {
+                    quit = ""
+                    PlayersFactory.assignTeam(player_index, quit)
+                };
+            }])
+
+        </script>
+    </head>
+    <body>
+        <h1> Sports Day! </h1>
+        <a href="#!/players"> Players </a>
+        <a href="#!/teams"> Teams </a>
+        <a href="#!/"> Associations </a>
+        <div ng-view = "">
+        </div>
+    </body>
+</html>

@@ -1,0 +1,132 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Products and Orders -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var myAppModule = angular.module("app", []);
+            myAppModule.factory("productFactory", ["$http", function ($http) {
+                var products = [{name: "MacBook Pro 13'", price: 1099, quantity: 50}];
+                var factory = {};
+
+                factory.getProducts = function (callback) {
+                    callback(products);
+                };
+                factory.createProduct = function (newProduct) {
+                    products.push(newProduct);
+                    newProduct.quantity = 50; // WHY DOES THIS WORK?!!?!?!?!?!?!??!
+                };
+                factory.destroyProduct = function (index) {
+                    products.splice(index, 1);
+                };
+                factory.adjustInventory = function (index, amount) {
+                    if (products[index].quantity > 0) {
+                        products[index].quantity += amount
+                    }
+                };
+                return factory;
+            }]);
+            myAppModule.controller("productController", ["$scope", "productFactory", function ($scope, productFactory) {
+                $scope.products = [];
+                productFactory.getProducts(function (data) {
+                    console.log(data);
+                    $scope.products = data;
+                    console.log($scope.products);
+                });
+                $scope.addProduct = function () {
+                    productFactory.createProduct($scope.newProduct)
+                    $scope.newProduct = {};
+                };
+                $scope.deleteProduct = function (index) {
+                    productFactory.destroyProduct(index)
+                };
+            }])
+            myAppModule.controller("orderController", ["$scope", "productFactory", function ($scope, productFactory) {
+                $scope.products = [];
+                productFactory.getProducts(function (data) {
+                    console.log(data);
+                    $scope.products = data;
+                    console.log($scope.products);
+                });
+                $scope.buyProduct = function ($index) {
+                    productFactory.adjustInventory($index, -1)
+                };
+            }])
+        </script>
+        <script type="text/javascript">
+            var myAppModule = angular.module("app", []);
+            myAppModule.factory("productFactory", ["$http", function ($http) {
+                var products = [{name: "MacBook Pro 13'", price: 1099, quantity: 50}];
+                var factory = {};
+        
+                factory.getProducts = function (callback) {
+                    callback(products);
+                };
+                factory.createProduct = function (newProduct) {
+                    products.push(newProduct);
+                    newProduct.quantity = 50; // WHY DOES THIS WORK?!!?!?!?!?!?!??!
+                };
+                factory.destroyProduct = function (index) {
+                    products.splice(index, 1);
+                };
+                factory.adjustInventory = function (index, amount) {
+                    if (products[index].quantity > 0) {
+                        products[index].quantity += amount
+                    }
+                };
+                return factory;
+            }]);
+        </script>
+    </head>
+    <body>
+        <div ng-controller = "productController">
+            <div class="">
+                <form>
+                    <label> Product Name: <input type="text" ng-model = "newProduct.name"></label>
+                    <label> Product Price: <input type="text" ng-model = "newProduct.price"></label>
+                    <input type="submit" value="Add to database" ng-click = "addProduct()">
+                    <p ng-bind = "newProduct.name"></p>
+                </form>
+            </div>
+            <div class="">
+                <table>
+                    <tr>
+                        <th> Name </th>
+                        <th> Price </th>
+                        <th> Actions </th>
+                    </tr>
+                    <tr ng-repeat="product in products track by $index">
+                        <td> {{ product.name }} </td>
+                        <td> {{ product.price }} </td>
+                        <td> <a class="btn" ng-click="deleteProduct($index)"> Delete Product </a> </td>
+                    </tr >
+                </table>
+            </div>
+        </div>
+        <div ng-controller = "orderController">
+            <div class="">
+                <table>
+                    <tr>
+                        <th> Name </th>
+                        <th> Price </th>
+                        <th> Quantity Available </th>
+                        <th> Actions </th>
+                    </tr>
+                    <tr ng-repeat="product in products track by $index">
+                        <td> {{ product.name }} </td>
+                        <td> {{ product.price }} </td>
+                        <td> {{ product.quantity }} </td>
+                        <td> <a class="" ng-click="buyProduct($index)"> <button type="button" name="button"> Buy Product </button> </a> </td>
+                    </tr >
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

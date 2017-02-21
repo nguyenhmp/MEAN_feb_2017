@@ -1,0 +1,32 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Partials and Custom Users -->
+
+<div ng-controller = "usersAdmin">
+    <div class="">
+        <form>
+            <label> First Name: <input type="text" ng-model = "newUser.first_name"></label>
+            <label> Last Name: <input type="text" ng-model = "newUser.last_name"></label>
+            <label> Favorite Language: <input type="text" ng-model = "newUser.language"></label>
+            <input type="submit" value="Add to database" ng-click = "addUser()">
+        </form>
+    </div>
+    <div class="">
+        <table>
+            <tr>
+                <th> First Name </th>
+                <th> Last Name </th>
+                <th> Favorite Language </th>
+                <th> Actions </th>
+            </tr>
+            <tr ng-repeat="user in users track by $index">
+                <td> {{ user.first_name }} </td>
+                <td> {{ user.last_name }} </td>
+                <td> {{ user.language }} </td>
+                <td> <a class="btn" ng-click="deleteUser($index)"> <button type="button" name="button"> Delete User </button> </a> </td>
+            </tr >
+        </table>
+    </div>
+</div>
