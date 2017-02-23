@@ -1,0 +1,28 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: Full MEAN
+Assignment: File Structure and Simple Server -->
+
+<div>
+    <label> Search User by Birthday: <input type="text" ng-model="user.dob" placeholder="Filter: Birthday!"> </label>
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Show </th>
+            <th> Update </th>
+            <th> Delete </th>
+        </tr>
+        <tr ng-repeat = "user in users track by $index">
+            <td> {{user.first_name }} {{user.last_name}}</td>
+            <td> <a href="#!/show/{{$index}}"> show </a> </td>
+            <td> <a href="#!/edit/{{$index}}"> edit </a> </td>
+            <td> <a ng-click = "delete($index)"> delete </a> </td>
+        </tr>
+    </table>
+</div>
+<a href = '#!/new'>
+    <button>
+        Create User
+    </button>
+</a>

@@ -1,0 +1,17 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: Full MEAN
+Assignment: MEAN_Friends -->
+
+{{editController.controlValue}} {{user.first_name}} {{user.last_name}} {{user.dob | date:"MM-dd-yyyy"}}
+<form ng-submit = "editController.updateUser()">
+    <!-- why doesn't value display inside of the input?! -->
+    <label for=""> First Name: <input type="text" ng-model = 'updatedInfo.first_name' placeholder = '{{updatedInfo.first_name}}'> </label>
+    <label for=""> Last Name: <input type="text" ng-model = 'updatedInfo.last_name' value = '{{updatedInfo.last_name}}'> </label>
+    <!-- need to work on date format / parsing -->
+    <label for=""> Date of Birth: <input type="date" ng-model = 'updatedInfo.dob' value = '{{updatedInfo.dob | date:"yyyy-MM-dd"}}'> </label>
+    <input type="submit"  value="Update">
+</form>
+
+<a ng-href = "#/index"> Home </a>
