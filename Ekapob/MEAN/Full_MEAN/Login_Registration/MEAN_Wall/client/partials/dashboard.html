@@ -1,0 +1,42 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+February 28, 2017
+Track: MEAN
+Course: Full MEAN
+Assignment: MEAN Wall -->
+
+<h1>Logged in as: {{currentUser}} </h1>
+
+<button type="button" ng-click="logout()"> Logout </button>
+
+<div class="">
+    <form>
+        <h3> Post a message: </h3>
+        <label> <input type="text" ng-model = "newMessage.message"> </label>
+        <input type="submit" value = 'Post Message' ng-click = "create_message()">
+    </form>
+</div>
+
+<div ng-repeat = "message in messages">
+    <p> {{message._user.name}} - {{message.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+    <p> {{message.message}} </p>
+    <div ng-repeat = "comment in message.comments">
+        <p> {{comment._user.name}} - {{comment.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+        <p> {{comment.comment}} </p>
+    </div>
+    <form>
+        <h4> Post a comment: </h4>
+        <label> <input type="text" ng-model = "newComment[message._id].comment"> </label>
+        <input type="submit" value = 'Post Comment' ng-click = "create_comment(message._id)">
+    </form>
+</div>
+<!-- Table below displays all users in database -->
+<!-- <table>
+    <tr>
+        <td> User ID </td>
+        <td> User Name </td>
+    </tr>
+    <tr ng-repeat = "user in users">
+        <td> {{user._id}} </td>
+        <td> {{user.name}} </td>
+</table> -->

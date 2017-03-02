@@ -1,0 +1,22 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: Login and Registration
+Assignment: Login and Registration -->
+
+<form>
+    <label for=""> First Name: <input type="text" ng-model = "user.first_name"> </label>
+    <label for=""> Last Name: <input type="text" ng-model = "user.last_name"> </label>
+    <label for=""> Date of Birth: <input type="date" ng-model = "user.dob"> </label>
+    <label for=""> Email: <input type="text" ng-model = "user.email"> </label>
+    <label for=""> Password: <input type="text" ng-model = "user.password"> </label>
+    <label for=""> Confirm Password: <input type="text" ng-model = "user.confirm_password"> </label>
+    <input type="submit" value = 'Add User' ng-click = "addUser()">
+</form>
+
+<div class="" ng-show="data.err">
+    <h1>Error!</h1>
+    <p ng-repeat = "info in data.err.errors"> {{info.message}} </p>
+    <p> {{errors.errmsg}} </p>
+</div>
+<a href = "#!/index"> Home </a>

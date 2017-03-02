@@ -1,0 +1,39 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+February 28, 2017
+Track: MEAN
+Course: Full MEAN
+Assignment: Discussion_Board -->
+
+<a href="#!/dashboard/{{currentUser}}"> Dashboard </a> &nbsp;
+<a href="#" ng-click="logout()"> Logout </a>
+
+<h4> <a href="#!/user/{{topic._user._id}}">{{topic._user.name}}</a> posted a topic:</h4>
+<h5> {{topic.title}} </h5>
+<p> Description: {{topic.description}} </p>
+
+<div class="">
+    <form>
+        <label> Post a Message: <textarea ng-model = "newMessage.message" rows="2" cols="80"> </textarea> </label>
+        <input type="submit" value = 'Post Message' ng-click = "create_message()">
+    </form>
+</div>
+
+<div ng-repeat = "message in topic.messages | orderBy: '-createdAt'">
+    <hr>
+    <div ng-if = "userID != message._user._id">
+        {{message.upvotes}} <button type="button" ng-click = upvote(message)> &#9650; </button> <br>
+        {{message.downvotes}} <button type="button" ng-click = downvote(message)> &#9660; </button>
+    </div>
+    <p> <a href="#!/user/{{message._user._id}}"> {{message._user.name}} </a> - {{message.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+    <p> {{message.message}} </p>
+    <div ng-repeat = "comment in message.comments">
+        <p> <a href="#!/user/{{comment._user._id}}"> {{comment._user.name}} </a> - {{comment.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+        <p> {{comment.comment}} </p>
+    </div>
+    <form>
+        <h4> Post a comment: </h4>
+        <label> Post a Comment: <textarea ng-model = "newComment[message._id].comment" rows="1" cols="60"> </textarea> </label>
+        <input type="submit" value = 'Post Comment' ng-click = "create_comment(message._id)">
+    </form>
+</div>
