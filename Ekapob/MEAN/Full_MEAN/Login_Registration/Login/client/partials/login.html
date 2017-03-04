@@ -1,0 +1,18 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: Login and Registration
+Assignment: Login and Registration -->
+
+<form>
+    <label for=""> Email: <input type="text" ng-model = "user.email"> </label>
+    <label for=""> Password: <input type="text" ng-model = "user.password"> </label>
+    <input type="submit" value = 'Login' ng-click = "login()">
+</form>
+
+<div class="" ng-show="data.err">
+    <h1>Error!</h1>
+    <p> {{data.err.err}} </p>
+    <p> {{errors.errmsg}} </p>
+</div>
+<a href = "#!/index"> Home </a>

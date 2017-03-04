@@ -1,0 +1,66 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+February 28, 2017
+Track: MEAN
+Course: Full MEAN
+Assignment: Discussion_Board -->
+
+<h1>Logged in as: {{currentUser}} </h1>
+
+<a href="#" ng-click="logout()"> Logout </a>
+
+<div class="">
+    <label>Search by Topic: <input type="text" ng-model = "topic.title"></label>
+    <table>
+        <tr>
+            <th> <a href="#!/dashboard/{{currentUser}}" ng-click = "listOrder = 'category'; sortReverse = !sortReverse"> Category </a> </th>
+            <th> <a href="#!/dashboard/{{currentUser}}" ng-click = "listOrder = 'title'; sortReverse = !sortReverse"> Topic </a> </th>
+            <th> <a href="#!/dashboard/{{currentUser}}" ng-click = "listOrder = '_user.name'; sortReverse = !sortReverse"> Created By </a> </th>
+            <th> <a href="#!/dashboard/{{currentUser}}" ng-click = "listOrder = 'messages.length'; sortReverse = !sortReverse"> Messages </a> </th>
+        </tr>
+        <tr ng-repeat = "topic in topics | filter : topic | orderBy: listOrder : sortReverse">
+            <td> {{topic.category}} </td>
+            <td> <a href="#!/topic/{{topic._id}}"> {{topic.title}} </a> </td>
+            <td> <a href="#!/user/{{topic._user._id}}"> {{topic._user.name}} </a> </td>
+            <td> {{topic.messages.length}} </td>
+        </tr>
+    </table>
+</div>
+
+<div class="">
+    <form>
+        <h3> Add a new Topic: </h3>
+        <label> Topic: <input type="text" ng-model = "newTopic.title"> </label>
+        <label> Description: <textarea ng-model = "newTopic.description" rows="8" cols="80"> </textarea> </label>
+        <label> Category:
+            <select ng-model = "newTopic.category">
+                <option ng-repeat = "category in categories"> {{category}} </option>
+            </select>
+        </label>
+        <input type="submit" value = 'Post Topic' ng-click = "create_topic()">
+    </form>
+</div>
+
+<div ng-repeat = "message in messages">
+    <p> {{message._user.name}} - {{message.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+    <p> {{message.message}} </p>
+    <div ng-repeat = "comment in message.comments">
+        <p> {{comment._user.name}} - {{comment.createdAt | date:"h:mm:a MM-dd-yyyy"}} </p>
+        <p> {{comment.comment}} </p>
+    </div>
+    <form>
+        <h4> Post a comment: </h4>
+        <label> <input type="text" ng-model = "newComment[message._id].comment"> </label>
+        <input type="submit" value = 'Post Comment' ng-click = "create_comment(message._id)">
+    </form>
+</div>
+<!-- Table below displays all users in database -->
+<!-- <table>
+    <tr>
+        <td> User ID </td>
+        <td> User Name </td>
+    </tr>
+    <tr ng-repeat = "user in users">
+        <td> {{user._id}} </td>
+        <td> {{user.name}} </td>
+</table> -->

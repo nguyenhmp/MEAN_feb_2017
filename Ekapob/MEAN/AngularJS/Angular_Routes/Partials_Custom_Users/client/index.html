@@ -1,0 +1,80 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Partials and Custom Users -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <script type="text/javascript">
+            var app = angular.module("app", ["ngRoute"]);
+            app.config(function ($routeProvider) {
+                $routeProvider
+                .when("/admin", {
+                    templateUrl: "partials/users_admin.html"
+                })
+                .when("/display", {
+                    templateUrl: "partials/users_display.html"
+                })
+                .otherwise({
+                    redirectTo: "/admin"
+                });
+            });
+
+            app.factory("userFactory", ["$http", function ($http) {
+                var users = [{
+                    first_name: "Ekapob",
+                    last_name: "Ukritnukun",
+                    language: "Python"
+                }];
+                var factory = {};
+
+                factory.getUsers = function (callback) {
+                    callback(users);
+                };
+                factory.createUsers = function (newUser) {
+                    users.push(newUser);
+                };
+                factory.destroyUsers = function (index) {
+                    users.splice(index, 1);
+                };
+                return factory;
+            }]);
+
+            app.controller("usersAdmin", ["$scope", "$location", "userFactory", function ($scope, $location, userFactory) {
+                $scope.users = [];
+                userFactory.getUsers(function (data) {
+                    console.log(data);
+                    $scope.users = data;
+                });
+                $scope.addUser = function () {
+                    userFactory.createUsers($scope.newUser)
+                    $scope.newUser = {};
+                    $location.url("/display")
+                };
+                $scope.deleteUser = function (index) {
+                    userFactory.destroyUsers(index)
+                };
+            }])
+
+            app.controller("usersDisplay", ["$scope", "userFactory", function ($scope, userFactory) {
+                $scope.users = [];
+                userFactory.getUsers(function (data) {
+                    $scope.users = data;
+                });
+            }])
+        </script>
+    </head>
+    <body>
+        <h1> Users </h1>
+        <a href="#!/admin"> Edit Users </a>
+        <a href="#!/display"> View List of Users</a>
+        <div ng-view = "">
+        </div>
+    </body>
+</html>

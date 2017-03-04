@@ -1,0 +1,20 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+February 28, 2017
+Track: MEAN
+Course: Full MEAN
+Assignment: Discussion_Board -->
+
+<h1> Welcome to the BEST message board on the Interwebs!!! </h1>
+<h3> Login now! </h3>
+
+<form>
+    <label for=""> User Name: <input type="text" ng-model = "user.name"> </label>
+    <input type="submit" value = 'Login' ng-click = "login()">
+</form>
+
+<div class="" ng-show="data.err">
+    <h1>Error!</h1>
+    <p> {{data.err.err}} </p>
+    <p> {{errors.errmsg}} </p>
+</div>

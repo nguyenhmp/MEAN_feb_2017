@@ -1,0 +1,75 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Products with a Factory -->
+
+<!DOCTYPE html>
+<html ng-app = "app">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var myAppModule = angular.module("app", []);
+            myAppModule.factory("productFactory", ["$http", function ($http) {
+                var products = [{name: "MacBook Pro 13'", price: 1099}];
+                var factory = {}; //Why do we need this?
+
+                factory.getProducts = function (callback) {
+                    callback(products);
+                };
+                factory.createProduct = function (newProduct) {
+                    console.log(newProduct);
+                    products.push(newProduct);
+                    console.log(products);
+                };
+                factory.destroyProduct = function(index) {
+                    products.splice(index, 1);
+                };
+                return factory;
+            }]);
+
+            myAppModule.controller("productController", ["$scope", "productFactory", function ($scope, productFactory) {
+                $scope.products = [];
+                productFactory.getProducts(function (data) {
+                    console.log(data);
+                    $scope.products = data;
+                    console.log($scope.products);
+                });
+                $scope.addProduct = function () {
+                    productFactory.createProduct($scope.newProduct)
+                    $scope.newProduct = {};
+                };
+                $scope.deleteProduct = function ($index) {
+                    productFactory.destroyProduct($index)
+                };
+            }])
+        </script>
+    </head>
+    <body>
+        <div ng-controller = "productController">
+            <div class="">
+                <form>
+                    <label> Product Name: <input type="text" ng-model = "newProduct.name"></label>
+                    <label> Product Price: <input type="text" ng-model = "newProduct.price"></label>
+                    <input type="submit" value="Add to database" ng-click = "addProduct()">
+                    <p ng-bind = "newProduct.name"></p>
+                </form>
+            </div>
+            <div class="">
+                <table>
+                    <tr>
+                        <th> Name </th>
+                        <th> Price </th>
+                    </tr>
+                    <tr ng-repeat="product in products track by $index">
+                        <td> {{ product.name }} </td>
+                        <td> {{ product.price }} </td>
+                        <td> <a class="btn" ng-click="deleteProduct($index)"> Delete Product </a> </td>
+                    </tr >
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

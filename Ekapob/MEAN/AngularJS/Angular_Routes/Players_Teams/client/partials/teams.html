@@ -1,0 +1,26 @@
+<!-- Ekapob Ukritnukun
+ThaiGQ@gmail.com
+Track: MEAN
+Course: AngularJS
+Assignment: Players and Teams -->
+
+<div ng-controller = "teamsController">
+    <div class="">
+        <form>
+            <label> Name: <input type="text" ng-model = "newTeam.name"></label>
+            <input type="submit" value="Add New Team" ng-click = "addTeam()">
+        </form>
+    </div>
+    <div class="">
+        <table>
+            <tr>
+                <th> Name </th>
+                <th> Actions </th>
+            </tr>
+            <tr ng-repeat="team in teams track by $index">
+                <td> {{ team.name }} </td>
+                <td> <a class="btn" ng-click="deleteTeam($index)"> <button type="button" name="button"> Delete Team </button> </a> </td>
+            </tr >
+        </table>
+    </div>
+</div>
